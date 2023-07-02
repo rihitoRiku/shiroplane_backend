@@ -21,6 +21,12 @@ const init = () => {
   // register the routes
 //   server.use('/auth', authRouter);
   server.use('/images', imageRouter);
+  server.get('/', (req, res) => {
+    res.json({
+      status: 'success',
+      message: 'welcome to our API service'
+    });
+  });
 
   // get env from .env file
   dotenv.config();

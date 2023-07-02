@@ -35,7 +35,7 @@ export const deleteImage = async (
   ) => {
     const { id } = req.params;
     try {
-      const image = await Image.findByIdAndDelete(id);
+      const image = await Image.findByIdAndDelete(id.replace(':', ''));
       if (!image) {
         const response = res.status(403).json({
           status: 'fail',
@@ -61,9 +61,10 @@ export const deleteImage = async (
     /** @type import('express').Request */ req,
     /** @type import('express').Response */ res,
   ) => {
+    console.log("OK HERE")
     const { id } = req.params;
     try {
-      const image = await Image.findById(id);
+      const image = await Image.findById(id.replace(':', ''));
       if (!image) {
         const response = res.status(403).json({
           status: 'fail',
