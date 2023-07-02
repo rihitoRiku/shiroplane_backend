@@ -18,6 +18,6 @@ const imageSchema = mongoose.Schema(
   { timestamps: true },
 );
 
-const Image = mongoose.model('storeimg', imageSchema);
+const Image = mongoose.model('storeimgs', imageSchema);
 
 export default Image;

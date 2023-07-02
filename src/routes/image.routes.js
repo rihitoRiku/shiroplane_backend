@@ -4,7 +4,7 @@ import {
 } from '../controllers/image.controllers.js';
 
 const router = express.Router();
-router.get('/images', getImages);
+router.get('/', getImages);
 router.delete('/:id', deleteImage);
 router.get('/:id', getImageById);
 
