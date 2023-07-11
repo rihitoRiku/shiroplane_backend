@@ -6,7 +6,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
-// import authRouter from './src/routes/auth.routes.js';
+import authRouter from './src/routes/auth.routes.js';
 import imageRouter from './src/routes/image.routes.js';
 
 const init = () => {
@@ -27,6 +27,10 @@ const init = () => {
       message: 'welcome to our API service'
     });
   });
+
+
+  server.use('/', authRouter);
+
 
   // get env from .env file
   dotenv.config();
