@@ -73,10 +73,9 @@ export const getImageById = async (
       });
       return response;
     }
-    const { password, ...others } = image._doc;
     const response = res.status(200).json({
       status: "success",
-      data: others,
+      data: image,
     });
     return response;
   } catch (err) {

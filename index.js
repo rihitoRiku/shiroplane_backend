@@ -20,13 +20,6 @@ const init = () => {
 
   //   server.use('/auth', authRouter);
   server.use("/images", imageRouter);
-  server.get("/", (req, res) => {
-    res.json({
-      status: "success",
-      message: "welcome to our API service",
-    });
-  });
-
   server.use("/auth", authRouter);
 
   // get env from .env file
