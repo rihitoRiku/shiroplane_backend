@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 
 import authRouter from "./src/routes/auth.routes.js";
 import imageRouter from "./src/routes/image.routes.js";
+import { verifyTokenAdmin, verifyTokenAndAuthorization } from "./src/middleware/auth.middleware.js";
 
 const init = () => {
   // setting up the server
@@ -18,9 +19,17 @@ const init = () => {
   server.use(helmet());
   server.use(morgan("common"));
 
+  server.get("/", (req, res) => {
+    res.send("Welcome to shiroplane API service!");
+  });
   //   server.use('/auth', authRouter);
   server.use("/images", imageRouter);
   server.use("/auth", authRouter);
+  // test protected
+  server.get("/protected/:id", verifyTokenAndAuthorization, (req, res) => {
+    // Access the authenticated user from req.user
+    res.status(200).json({ message: 'Access granted to protected resource' });
+  });
 
   // get env from .env file
   dotenv.config();

@@ -28,6 +28,23 @@ export const registerUser = async (
   }
 };
 
+export const logoutUser = async (req, res) => {
+  const { token } = req.body;
+  try {
+    revokedTokens.push(token);
+    const response = res.status(200).json({
+      status:'logout success',
+    });
+    return response;
+  } catch (err) {
+    const response = res.status(500).json({
+      status: 'fail',
+      message: err.message,
+    });
+    return response;
+  }
+}
+
 export const loginUser = async (
   /** @type import('express').Request */ req,
   /** @type import('express').Response */ res,
@@ -50,7 +67,7 @@ export const loginUser = async (
     if (passwordDecrypt !== passwordUser) {
       const response = res.status(401).json({
         status: 'fail',
-        message: 'Wrong passwordd!',
+        message: 'Wrong password!',
       });
       return response;
     }

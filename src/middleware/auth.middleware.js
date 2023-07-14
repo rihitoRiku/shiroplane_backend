@@ -20,13 +20,20 @@ export const auth = (req, res, next) => {
       });
       return response;
     }
+  }else{
+    return res.status(401).json({
+      status: "fail",
+      message: "Authentication token missing.",
+    });
   }
 };
 
 export const verifyTokenAndAuthorization = (req, res, next) => {
+  console.log("OK!");
   // eslint-disable-next-line consistent-return
   auth(req, res, () => {
     if (req.user && (req.user.id === req.params.id || req.user.isAdmin)) {
+      console.log("OK2!");
       next();
     } else {
       const response = res.status(403).json({
@@ -37,6 +44,7 @@ export const verifyTokenAndAuthorization = (req, res, next) => {
     }
   });
 };
+
 export const verifyTokenAdmin = (req, res, next) => {
   // eslint-disable-next-line consistent-return
   auth(req, res, () => {
