@@ -8,13 +8,14 @@ import mongoose from "mongoose";
 
 import authRouter from "./src/routes/auth.routes.js";
 import imageRouter from "./src/routes/image.routes.js";
+import cloudinaryRouter from "./src/routes/cloudinary.routes.js";
 import { verifyTokenAdmin, verifyTokenAndAuthorization } from "./src/middleware/auth.middleware.js";
 
 const init = () => {
   // setting up the server
   const server = express();
-  server.use(bodyParser.json({ limit: "10mb", extended: true }));
-  server.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
+  server.use(bodyParser.json({ limit: "15mb", extended: true }));
+  server.use(bodyParser.urlencoded({ limit: "15mb", extended: true }));
   server.use(cors());
   server.use(helmet());
   server.use(morgan("common"));
@@ -25,6 +26,7 @@ const init = () => {
   //   server.use('/auth', authRouter);
   server.use("/images", imageRouter);
   server.use("/auth", authRouter);
+  server.use("/cloudinary", cloudinaryRouter);
   // test protected
   server.get("/protected/:id", verifyTokenAndAuthorization, (req, res) => {
     // Access the authenticated user from req.user

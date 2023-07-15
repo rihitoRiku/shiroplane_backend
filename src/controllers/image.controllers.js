@@ -94,11 +94,13 @@ export const insertImage = async (
     const title = req.body["title"];
     const desc = req.body["desc"];
     const imgSrc = req.body["imgSrc"];
+    const imgId = req.body["imgId"];
     try {
     const image = new Image({
       title,
       desc,
       imgSrc,
+      imgId,
     });
     const result = await image.save();
     const response = res.status(200).json({
