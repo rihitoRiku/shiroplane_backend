@@ -32,6 +32,10 @@ const init = () => {
     // Access the authenticated user from req.user
     res.status(200).json({ message: 'Access granted to protected resource' });
   });
+  server.get("/dashboard/:id", verifyTokenAndAuthorization, (req, res) => {
+    // Access the authenticated user from req.user
+    res.status(200).json({ message: 'Access granted to protected resource' });
+  });
 
   // get env from .env file
   dotenv.config();

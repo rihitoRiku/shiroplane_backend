@@ -82,6 +82,7 @@ export const loginUser = async (
     const { password, ...others } = user._doc;
     const response = res.status(200).json({
       status: 'success',
+      message: 'login success!',
       data: { ...others, accessToken },
     });
     return response;
