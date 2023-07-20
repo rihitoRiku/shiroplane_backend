@@ -95,6 +95,7 @@ export const insertImage = async (
     const desc = req.body["desc"];
     const imgSrc = req.body["imgSrc"];
     const imgId = req.body["imgId"];
+    console.log("1:",title,"2:",desc,"3:",imgSrc,"4:",imgId)
     try {
     const image = new Image({
       title,
