@@ -1,7 +1,9 @@
 import Image from "../models/image.models.js";
-import { v2 as cloudinary } from "cloudinary";
-import dotenv from "dotenv";
-dotenv.config();
+import cloudinary from '../config/cloudinary.config.js';
+
+// import { v2 as cloudinary } from 'cloudinary'
+// import dotenv from "dotenv";
+// dotenv.config();
 
 export const getImages = async (req, res) => {
   try {
@@ -9,15 +11,20 @@ export const getImages = async (req, res) => {
 };
 
 export const deleteImage = async (req, res) => {
+
+  // var cloudinary = require('cloudinary');
   const { id } = req.params;
-  const paramsToSign = {
-    preset_name: process.env.REACT_APP_YOUR_PRESET_NAME,
-  };
-  const signature = cloudinary.utils.api_sign_request(
-    paramsToSign,
-    process.env.REACT_APP_YOUR_API_SECRET
-  );
-  const now = Date.now();
+
+  console.log(id);
+
+  // const paramsToSign = {
+  //   preset_name: process.env.REACT_APP_YOUR_PRESET_NAME,
+  // };
+  // const signature = cloudinary.utils.api_sign_request(
+  //   paramsToSign,
+  //   process.env.REACT_APP_YOUR_API_SECRET
+  // );
+  // const now = Date.now();
   //   console.log({
   //     public_id: id,
   //     api_key: process.env.REACT_APP_YOUR_API_KEY,
@@ -27,8 +34,10 @@ export const deleteImage = async (req, res) => {
   //   });
 
   try {
+
     // await cloudinary.v2.uploader.destroy(id, options).then(callback);
     await cloudinary.uploader.destroy(id, function (error, result) {
+      
       if (error) {
         console.log("Failed to delete image: ", error);
       } else {
