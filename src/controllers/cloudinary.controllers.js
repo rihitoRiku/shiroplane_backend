@@ -1,9 +1,5 @@
 import Image from "../models/image.models.js";
-import cloudinary from '../config/cloudinary.config.js';
-
-// import { v2 as cloudinary } from 'cloudinary'
-// import dotenv from "dotenv";
-// dotenv.config();
+import { cloudinary, upload } from "../config/cloudinary.config.js";
 
 export const getImages = async (req, res) => {
   try {
@@ -11,8 +7,6 @@ export const getImages = async (req, res) => {
 };
 
 export const deleteImage = async (req, res) => {
-
-  // var cloudinary = require('cloudinary');
   const { id } = req.params;
 
   console.log(id);
@@ -34,16 +28,18 @@ export const deleteImage = async (req, res) => {
   //   });
 
   try {
+    const folder = "ShiroPlane";
 
-    // await cloudinary.v2.uploader.destroy(id, options).then(callback);
-    await cloudinary.uploader.destroy(id, function (error, result) {
-      
+    await cloudinary.uploader.destroy(id, { folder }, function (error, result) {
       if (error) {
         console.log("Failed to delete image: ", error);
       } else {
         console.log("Successfully deleted image: ", result);
       }
     });
+
+    // await cloudinary.v2.uploader.destroy(id, options).then(callback);
+
     // await Axios.post(
     //   `https://api.cloudinary.com/v1_1/dqmorrdhr/image/destroy`,
     //   {
@@ -54,6 +50,7 @@ export const deleteImage = async (req, res) => {
     //     timestamp: now,
     //   }
     // );
+
     const response = res.status(200).json({
       status: "success",
       message: "image in cloudinary successfuly deleted",
