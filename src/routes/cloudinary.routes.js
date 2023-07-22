@@ -5,7 +5,7 @@ import {
 
 const router = express.Router();
 router.get('/', getImages);
-router.post('/:id', deleteImage);
+router.delete('/', deleteImage);
 // router.get('/:id', getImageById);
 router.post('/', insertImage);
 

@@ -7,9 +7,9 @@ export const getImages = async (req, res) => {
 };
 
 export const deleteImage = async (req, res) => {
-  const { id } = req.params;
+  const id = req.body.public_id;
 
-  console.log(id);
+  console.log("ID IMAGE UYY::",id);
 
   // const paramsToSign = {
   //   preset_name: process.env.REACT_APP_YOUR_PRESET_NAME,
@@ -30,6 +30,7 @@ export const deleteImage = async (req, res) => {
   try {
     const folder = "ShiroPlane";
 
+    // WORKS
     await cloudinary.uploader.destroy(id, { folder }, function (error, result) {
       if (error) {
         console.log("Failed to delete image: ", error);
@@ -68,25 +69,19 @@ export const deleteImage = async (req, res) => {
 
 export const insertImage = async (req, res) => {
   // Use the upload middleware to handle the image upload
-  upload.single("file")(req, res, async (error) => {
+  upload.single("file")(req, res, (error) => {
     if (error) {
       console.error("Error uploading image:", error);
       return res.status(500).json({ error: "Image upload failed" });
     }
 
-    // Upload the image to Cloudinary
-    try {
-      const result = await cloudinary.uploader.upload(req.file.path);
-      
-      // Return the result
-      return res.json({
-        secure_url: result.secure_url,
-        public_id: result.public_id
-      });
-
-    } catch (error) {
-      console.log('Cloudinary upload error:', error);
-      return res.status(500).send('Upload to Cloudinary failed');
+    if (!req.file) {
+      return res.status(400).send("No file uploaded");
     }
+
+    return res.json({
+      secure_url: req.file.path,
+      public_id: req.file.filename
+    });
   });
 };
