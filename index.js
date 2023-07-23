@@ -26,7 +26,7 @@ const init = () => {
   //   server.use('/auth', authRouter);
   server.use("/images", imageRouter);
   server.use("/auth", authRouter);
-  server.use("/cloudinary", cloudinaryRouter);
+  server.use("/cloudinary", verifyTokenAdmin, cloudinaryRouter);
   // test protected
   server.get("/protected/:id", verifyTokenAndAuthorization, (req, res) => {
     // Access the authenticated user from req.user
