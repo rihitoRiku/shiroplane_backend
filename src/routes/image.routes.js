@@ -6,8 +6,8 @@ import { verifyTokenAdmin, verifyTokenAndAuthorization } from "../middleware/aut
 
 const router = express.Router();
 router.get('/', getImages);
-router.delete('/:id',verifyTokenAndAuthorization, deleteImage);
+router.delete('/:id', verifyTokenAndAuthorization, deleteImage);
 router.get('/:id', getImageById);
-router.post('/',verifyTokenAndAuthorization, insertImage);
+router.post('/', verifyTokenAndAuthorization, insertImage);
 
 export default router;

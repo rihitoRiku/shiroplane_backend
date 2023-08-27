@@ -36,6 +36,7 @@ export const deleteImage = async (
 ) => {
   const { id } = req.params;
   try {
+    console.log(id);
     const image = await Image.findByIdAndDelete(id.replace(":", ""));
     if (!image) {
       const response = res.status(403).json({
