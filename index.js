@@ -16,7 +16,7 @@ const init = () => {
   const server = express();
   server.use(bodyParser.json({ limit: "15mb", extended: true }));
   server.use(bodyParser.urlencoded({ limit: "15mb", extended: true }));
-  server.use(cors());
+  server.use(cors({origin: true, credentials: true}));
   server.use(helmet());
   server.use(morgan("common"));
 
